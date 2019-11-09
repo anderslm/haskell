@@ -1,17 +1,17 @@
 module Lib
-    ( someFunc
+    ( validateReading
     , MeasuringPeriod ( MeasuringPeriod, from, to )
-    , Reading ( Reading )
-    , LoadProfileReading ( UnverifiedReading )
+    , Reading ( Reading, value, period )
+    , LoadProfileReading ( UnverifiedReading, InvalidReading, ValidReading )
     ) where
 
 import Data.Time
 
 data MeasuringPeriod = MeasuringPeriod { from :: UTCTime, to :: UTCTime }
 
-data Reading = Reading Double MeasuringPeriod
+data Reading = Reading { value :: Double, period :: MeasuringPeriod }
 
 data LoadProfileReading = UnverifiedReading Reading | InvalidReading Reading | ValidReading Reading
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+validateReading :: LoadProfileReading -> LoadProfileReading
+validateReading lp = lp
